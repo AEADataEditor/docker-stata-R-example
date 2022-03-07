@@ -16,6 +16,7 @@ VERSION=17
 TAG=$(date +%F) 
 MYHUBID=larsvilhuber
 MYIMG=${PWD##*/}
+STATALIC=/path/to/stata.lic
 ```
 
 where
@@ -24,6 +25,7 @@ where
 - `TAG` is the Docker tag you will be using - could be "latest", could be a specific name. Has to be lower-case.
 - `MYHUBID` is presumably your Docker login
 - `MYIMG` is the name you want to give the Docker image you are creating. By default, it presumes that it will be the same name as the Git repository.
+- `STATALIC`  is the path to a valid Stata license file (for instance, as installed on your laptop)
 
 - Edit the [`Dockerfile`](Dockerfile). The primary configuration parameters are at the top:
 
@@ -49,7 +51,7 @@ where
 Use `build.sh (NAME OF STATA LICENSE FILE)`, e.g.
 
 ```{bash}
-./build.sh /usr/local/stata/stata.lic
+./build.sh 
 ```
 
 ## Running
@@ -57,6 +59,6 @@ Use `build.sh (NAME OF STATA LICENSE FILE)`, e.g.
 You also need the Stata license for running it all. For convenience, use the `run.sh` script:
 
 ```{bash}
-./run.sh /usr/local/stata/stata.lic
+./run.sh 
 ```
 
