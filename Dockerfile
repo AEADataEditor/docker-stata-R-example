@@ -60,3 +60,9 @@ USER rstudio
 WORKDIR /code
 ENTRYPOINT ["stata-mp"]
 
+# Setup for Rstudio operation
+# comment out the above section!
+#
+#USER ROOT
+#EXPOSE 8787
+#CMD ["/init"]
