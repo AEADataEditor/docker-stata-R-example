@@ -4,7 +4,7 @@ TAG=$(date +%F)
 # This should be your login on Docker Hub
 MYHUBID=larsvilhuber
 # This can be anything, but might be the current repository name
-MYIMG=MYIMG=${PWD##*/}
+MYIMG=${PWD##*/}
 # Identify where your Stata license may be. This can be hard-coded, or can be a function.
 # Remember to quote any strings that have spaces
 # STATALIC="/home/user/Stata 17/STATA.LIC"
