@@ -54,6 +54,35 @@ Use `build.sh (NAME OF STATA LICENSE FILE)`, e.g.
 ./build.sh 
 ```
 
+### Notes about Stata licenses
+
+Because Stata is licensed software, you need to have a valid license to **run** the software. If you include this in the Docker container itself, then you should **not publish** the container, since it will permanently include the license (even if you first include it, and then remove it, unless you become really tricky...). 
+
+So how should you go about building into the container some of the packages? You should not. You should instead include these as part of a replication package. However, you can use the container to set them up as follows:
+
+- [Build the container](./build.sh) - no license file required.
+- Run the container a first time, with the setup script that installs the packages. You should include a configuration that uses a [project-specific ado directory](https://larsvilhuber.github.io/self-checking-reproducibility/12-environments-in-stata.html). You will later use the same config to run the code itself, so your setup program might look like this:
+
+```{stata}
+// setup.do
+
+include "config.do"
+// install packages
+ssc install estout
+```
+
+- Your `config.do` would look like [this one](https://larsvilhuber.github.io/self-checking-reproducibility/12-environments-in-stata.html#using-environments-in-stata). 
+- Your `main.do` would not re-execute the `setup.do`, but **would** include the `config.do` that redirects Stata to use the project-specific ado directory:
+
+```{stata}
+// main.do
+include "config.do"
+// rest of the code
+```
+
+- Your replication package would include the `setup.do`, the `config.do`, the `main.do`, and the `ado` directory created. 
+
+
 ## Running
 
 You also need the Stata license for running it all. For convenience, use the `run.sh` script:
